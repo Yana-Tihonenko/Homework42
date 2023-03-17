@@ -13,10 +13,9 @@ public class Account {
     private int reputation;
 
     public Account(String name, String email) {
-        checkName(name);
-        checkEmail(email);
-        this.name = name;
-        this.email = email;
+
+        this.name = checkName(name);
+        this.email = checkEmail(email);
         reputation = 0;
     }
 
@@ -55,17 +54,17 @@ public class Account {
         return reputation;
     }
 
-    private static boolean checkName(String name) {
+    private static String checkName(String name) {
         if (name.length() < MIN_LENGTH_NAME) {
             throw new InvalidName(String.format("Error: name must be more than %d characters", MIN_LENGTH_NAME));
         }
         if (name.length() > MAX_LENGTH_NAME) {
             throw new InvalidName(String.format("Error: name must be less than %d characters", MIN_LENGTH_NAME));
         }
-        return true;
+        return name;
     }
 
-    private static boolean checkEmail(String email) {
+    private static String checkEmail(String email) {
         if (email.indexOf('@') == -1) {
             throw new InvalidEmail("Error: incorrect format e-mail");
         }
@@ -75,7 +74,7 @@ public class Account {
         if (email.length() > MAX_LENGTH_EMIL) {
             throw new InvalidEmail(String.format("Error: email must be less than %d characters", MAX_LENGTH_EMIL));
         }
-        return true;
+        return email;
     }
 
 
